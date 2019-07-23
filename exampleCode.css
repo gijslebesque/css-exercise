@@ -1,0 +1,101 @@
+
+
+                            /* ------- Positioning ------- */
+
+/* 
+    1.position: static;     -> html elements are positioned statically by default. 
+        This means that they're positioned according to the normal (expected) flow of the webpage.
+    2. position: relative;  -> an element can be positioned differently relative to it's normal position.
+    3. position: absolute;  -> position absolute will position an element relative to the nearest ancestor that is not static.
+    4. position: fixed;     -> this will position an element relative to the viewport. 
+    5. position: sticky;    -> will switch between position relative and position fixed based on scroll behaviour (doesn't have full browser support).
+
+    After setting position elements can be moved around with the top, right, bottom and left properties.
+    The value of each property will determine what the space is between the element and it's sides.
+    
+
+*/
+
+
+
+                            /* ------- Flex box (container) ------- */
+
+.flex-container {
+    /* We first create a flex layout context */
+    display: flex;
+    
+    /* 
+        by default flex will have : 
+        flex-direction: row; -> flex items will be distrubted horizontally.
+        align-items: strech; -> flex items will have the same height (based on largest element).
+        flex-wrap: nowrap;   -> flex items fle will all try to fit onto one line.
+    */
+    
+    /* With justify content we define how the remaining space is utilised on the main axis */
+    justify-content: space-around; 
+
+    /* With align-items we specify how the space is organised on the cross axis (opposite of the main axis) */
+    align-items: center;  /* default is strech*/
+}
+  
+                            /* ------- Flex items ------- */
+/* 
+    All the direct children of the flex container are flex items.
+  
+*/
+
+.flex-item {
+    align-self:flex-end; /* We can overwrite the align items property per individual element with align-self. */
+    flex-basis: 300px; /* This defines the default size of an element before the remaining space is distributed.*/
+    flex-grow: 2; /* if there's left over space this element will use twice as much as it's siblings of that space.*/ 
+    flex-shrink: 2; /* if there room to shrink the element will shrink twice as much as it's siblings */
+
+    /* this is an useful article to understand shrink and grow better: https://medium.com/@tiffnogueira/understanding-flex-shrink-flex-grow-and-flex-basis-and-using-these-properties-to-their-full-e4b4afd2c930 */
+}
+
+
+                            /* ------- Media Queries ------- */
+
+/* A media queries is CSS's way to write conditionals (if statements) 
+    The syntax is as follows: 
+    @media( conditional ) {
+        htmlSelector {
+            cssProperty:value;
+        }
+    }
+   
+    For example:
+*/
+
+@media(max-width: 650px) { /* This styling will be applied if the browser window is 650px or smaller */ 
+    .flex-container {
+        flex-direction: column;
+    }
+}
+
+ /* You can add more conditions with the and keyword. */
+
+@media only screen and (max-width:650px) { /*The only keyword is used to prevent older browsers that do not support media queries with media features from applying the specified styles.*/
+    .flex-container {
+        flex-direction: column-reverse;
+    }
+}
+
+                            /* ------- Mobile First ------- */
+/* 
+    Here's a list with media queries for some standard devices: https://css-tricks.com/snippets/css/media-queries-for-standard-devices/
+    means designing for mobile before designing for desktop or any other device 
+    (This will make the page display faster on smaller devices). 
+    In practise that means that the 'regular CSS' is written for the mobile design of the webpage.
+    Media queries than are used to apply style for larger screen sizes.
+
+    Thus: instead of max-width, we use min-width for the query.
+*/
+
+
+ 
+@media(min-width: 650px) { /* This styling will be applied if the browser window 650px or larger */ 
+    .flex-container {
+        flex-direction: row;
+    }
+}
